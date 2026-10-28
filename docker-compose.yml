@@ -1,0 +1,20 @@
+
+services:
+  api:
+    build: .
+    container_name: ngo-management-api
+    ports:
+      - "8000:8000"
+    environment:
+      APP_NAME: "NGO Management System"
+      DATABASE_URL: "sqlite:////data/ngo_management.db"
+      SECRET_KEY: "${SECRET_KEY:?Set SECRET_KEY in your environment}"
+      ACCESS_TOKEN_EXPIRE_MINUTES: "30"
+      REFRESH_TOKEN_EXPIRE_DAYS: "7"
+      PASSWORD_RESET_EXPIRE_MINUTES: "15"
+    volumes:
+      - ngo_data:/data
+    restart: unless-stopped
+
+volumes:
+  ngo_data:
